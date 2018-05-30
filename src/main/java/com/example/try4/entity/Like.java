@@ -14,9 +14,6 @@ public class Like {
     @Column(name = "app_id")
     private long app_id;
 
-    public Like() {
-    }
-
     public Like(String username, long app_id) {
         this.username = username;
         this.app_id = app_id;

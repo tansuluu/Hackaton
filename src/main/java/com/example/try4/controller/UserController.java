@@ -8,6 +8,7 @@ import com.example.try4.entity.Application;
 import com.example.try4.entity.Post;
 import com.example.try4.service.EmailService;
 import com.example.try4.service.StorageService;
+import com.example.try4.utils.EncrytedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
@@ -88,10 +89,12 @@ public class UserController {
         appUserDAO.updateUser(user);
         return "redirect:/userPage?username="+user.getUserName();
     }
+
     @RequestMapping(value = "/forgot", method = RequestMethod.GET)
     public String displayForgotPasswordPage() {
         return "forget";
     }
+
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
     public String processForgotPasswordForm(Model modelAndView, @RequestParam("email") String userEmail, HttpServletRequest request) {
 
@@ -112,7 +115,7 @@ public class UserController {
             passwordResetEmail.setTo(user.getEmail());
             passwordResetEmail.setSubject("Password Reset Request");
             passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
-                    + "/reset?token=" + user.getConfirm());
+                    + ":8080/reset?token=" + user.getConfirm());
 
             emailService.sendEmail(passwordResetEmail);
 
@@ -131,15 +134,38 @@ public class UserController {
         AppUser user=appUserDAO.findUserconfirm(token);
 
         if (user!=null) { // Token found in DB
-
+            modelAndView.addAttribute("token", token);
+            modelAndView.addAttribute("user",user);
         } else { // Token not found in DB
             modelAndView.addAttribute("message", "Oops!  This is an invalid password reset link.");
         }
-
-
         return "resetPassword";
     }
 
 
+    // Process reset password form
+    @RequestMapping(value = "/reset", method = RequestMethod.POST)
+    public String setNewPassword(Model modelAndView, @RequestParam("password") String  password, @RequestParam("token") String token) {
+
+        // Find the user associated with the reset token
+            AppUser user = appUserDAO.findUserconfirm(token);
+
+        // This should always be non-null but we check just in case
+        if (user!=null) {
+
+            // Set new password
+            String encrytedPassword = EncrytedPasswordUtils.encrytePassword(password);
+            user.setEncrytedPassword(encrytedPassword);
+
+
+            // Save user
+            appUserDAO.addUser(user);
+
+
+
+        }
+        return "redirect:/login";
+    }
 
 }
+

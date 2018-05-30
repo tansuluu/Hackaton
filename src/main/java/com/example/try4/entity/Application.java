@@ -32,7 +32,7 @@ public class Application {
     @Column(name = "photo3", length = 36)
     private String photo3;
     @Column(name = "number", length = 128)
-    @Pattern(regexp="(^$|[0-9]{10})",message = "Phone Number must be like 0777007700")
+    @Pattern(regexp="(^$|[0-9]{10})",message = "Phone Number must be like 0777004455")
     private String number;
     @Column(name = "usarname", length = 136)
     private String usarname;

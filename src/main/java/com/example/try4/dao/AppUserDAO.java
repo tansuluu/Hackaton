@@ -4,7 +4,6 @@ import com.example.try4.entity.*;
 import com.example.try4.form.AppUserForm;
 import com.example.try4.utils.EncrytedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.connect.UserProfile;
@@ -21,13 +20,6 @@ import java.util.UUID;
 @Repository
 @Transactional
 public class AppUserDAO  {
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    public AppUserDAO(JdbcTemplate jdbcTemplate)
-    {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
 
     @Autowired
