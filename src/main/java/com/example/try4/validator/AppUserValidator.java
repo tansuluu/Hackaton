@@ -37,9 +37,11 @@ public class AppUserValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         AppUserForm form = (AppUserForm) target;
-
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "", "First name is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "", "User name is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "", "Last name is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password is required");
 
         AppUser userAccount = appUserDAO.findAppUserByUserName( form.getUserName());
         if (userAccount != null) {
@@ -51,7 +53,7 @@ public class AppUserValidator implements Validator {
                 return;
             }
         }
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "", "First name is required");
+
         if (!(form.getFirstName() != null && form.getFirstName().isEmpty())) {
             pattern = Pattern.compile(STRING_PATTERN);
             matcher = pattern.matcher(form.getFirstName());
@@ -60,7 +62,6 @@ public class AppUserValidator implements Validator {
                         "Enter a valid First name");
             }
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "", "Last name is required");
         if (!(form.getLastName() != null && form.getLastName().isEmpty())) {
             pattern = Pattern.compile(STRING_PATTERN);
             matcher = pattern.matcher(form.getLastName());
@@ -69,19 +70,15 @@ public class AppUserValidator implements Validator {
                         "Enter a valid Last name");
             }
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password is required");
 
         if (errors.hasErrors()) {
             return;
         }
-
         if (!emailValidator.isValid(form.getEmail())) {
 
-            errors.rejectValue("email", "", "Email is not valid");
+            errors.rejectValue("email", "", "Please write valid email");
             return;
         }
-
-
         userAccount = appUserDAO.findByEmail(form.getEmail());
         if (userAccount != null) {
                 errors.rejectValue("email", "", "Email is not available");
