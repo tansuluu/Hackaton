@@ -40,15 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/", "/signup", "/login", "/logout","/found","/lost").permitAll();
 
         http.authorizeRequests().antMatchers("/userInfo","/newApplication","/toAddPost").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-
         // For ADMIN only.
         http.authorizeRequests().antMatchers("/admin").access("hasRole('" + AppRole.ROLE_ADMIN + "')");
-
         // When the user has logged in as XX.
-        // But access a page that requires role YY,
         // AccessDeniedException will be thrown.
-
-
         // Form Login config
         http.authorizeRequests().and().formLogin()//
                 // Submit URL of login page.
@@ -61,7 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Logout Config
         http.authorizeRequests().and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
-
         // Spring Social Config.
         http.apply(new SpringSocialConfigurer())
                 //

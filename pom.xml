@@ -106,36 +106,6 @@
 			<version>1.1.5.RELEASE</version>
 		</dependency>
 
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-facebook -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-facebook</artifactId>
-			<version>2.0.3.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-twitter -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-twitter</artifactId>
-			<version>1.1.2.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-github -->
-		<!-- <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-github</artifactId>
-            <version>1.0.0.M4</version>
-        </dependency> -->
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-linkedin -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-linkedin</artifactId>
-			<version>1.0.2.RELEASE</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.springframework.social/spring-social-google -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
