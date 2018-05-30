@@ -142,42 +142,7 @@ public class UserController {
 
         return "resetPassword";
     }
-//
-//    // Process reset password form
-//    @RequestMapping(value = "/reset", method = RequestMethod.POST)
-//    public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam("password"), String ) {
-//
-//        // Find the user associated with the reset token
-//        Optional<User> user = userService.findUserByResetToken(requestParams.get("token"));
-//
-//        // This should always be non-null but we check just in case
-//        if (user.isPresent()) {
-//
-//            User resetUser = user.get();
-//
-//            // Set new password
-//            resetUser.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
-//
-//            // Set the reset token to null so it cannot be used again
-//            resetUser.setResetToken(null);
-//
-//            // Save user
-//            userService.saveUser(resetUser);
-//
-//            // In order to set a model attribute on a redirect, we must use
-//            // RedirectAttributes
-//            redir.addFlashAttribute("successMessage", "You have successfully reset your password.  You may now login.");
-//
-//            modelAndView.setViewName("redirect:login");
-//            return modelAndView;
-//
-//        } else {
-//            modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
-//            modelAndView.setViewName("resetPassword");
-//        }
-//
-//        return modelAndView;
-//    }
+
 
 
 }
