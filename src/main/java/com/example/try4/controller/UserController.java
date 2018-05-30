@@ -118,7 +118,6 @@ public class UserController {
                     + ":8080/reset?token=" + user.getConfirm());
 
             emailService.sendEmail(passwordResetEmail);
-
             // Add success message to view
             modelAndView.addAttribute("message", "A password reset link has been sent to " + userEmail);
         }
@@ -146,23 +145,15 @@ public class UserController {
     // Process reset password form
     @RequestMapping(value = "/reset", method = RequestMethod.POST)
     public String setNewPassword(Model modelAndView, @RequestParam("password") String  password, @RequestParam("token") String token) {
-
-        // Find the user associated with the reset token
-            AppUser user = appUserDAO.findUserconfirm(token);
-
-        // This should always be non-null but we check just in case
+        AppUser user = appUserDAO.findUserconfirm(token);
         if (user!=null) {
 
             // Set new password
             String encrytedPassword = EncrytedPasswordUtils.encrytePassword(password);
             user.setEncrytedPassword(encrytedPassword);
 
-
             // Save user
             appUserDAO.addUser(user);
-
-
-
         }
         return "redirect:/login";
     }

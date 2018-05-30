@@ -116,10 +116,8 @@ public class MainController {
     public String signupSave(WebRequest request, //
                              Model model, @RequestParam("imageUrl") String image,//
                              @ModelAttribute("myForm") @Validated AppUserForm appUserForm, //
-                             BindingResult result, //
-                             final RedirectAttributes redirectAttributes) {
+                             BindingResult result) {
 
-        // Validation error.
         if (result.hasErrors()) {
             return "signup";
         }
