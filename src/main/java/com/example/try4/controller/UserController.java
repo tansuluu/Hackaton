@@ -101,10 +101,7 @@ public class UserController {
             modelAndView.addAttribute("message", "We didn't find an account for that e-mail address."+user.getEmail());
             return "forget";
         } else {
-
             user.setConfirm(UUID.randomUUID().toString());
-
-            // Save token to database
             appUserDAO.addUser(user);
 
             String appUrl = request.getScheme() + "://" + request.getServerName();
