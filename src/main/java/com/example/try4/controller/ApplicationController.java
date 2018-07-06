@@ -44,7 +44,7 @@ public class ApplicationController {
     @Autowired
     private LikeDAO likeDAO;
 
-    @RequestMapping(value = "/newApplication", method = RequestMethod.GET)
+    @RequestMapping(value = "/newDevice", method = RequestMethod.GET)
     public String viewRegister(Model model) {
         Application form = new Application();
         model.addAttribute("app", form);
