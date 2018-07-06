@@ -9,13 +9,14 @@ public class AppUserForm {
     private String email;
     private String userName;
     private String confirm;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String country;
+    private String gender;
     private String password;
     private String role;
     private String signInProvider;
     private String providerUserId;
-    private String department;
+    private int age;
     private boolean enabled;
     private String urlImage;
     public AppUserForm() {
@@ -26,8 +27,7 @@ public class AppUserForm {
         this.userId = null;
         this.email = socialUserProfile.getEmail();
         this.userName = socialUserProfile.getFirstName()+"_"+socialUserProfile.getLastName();
-        this.firstName = socialUserProfile.getFirstName();
-        this.lastName = socialUserProfile.getLastName();
+        this.name = socialUserProfile.getFirstName()+" "+socialUserProfile.getLastName();
         ConnectionKey key = connection.getKey();
         // google, facebook, twitter
         this.signInProvider = key.getProviderId();
@@ -62,22 +62,6 @@ public class AppUserForm {
         this.userName = userName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -110,13 +94,6 @@ public class AppUserForm {
         this.providerUserId = providerUserId;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 
     public String getConfirm() {
         return confirm;
@@ -141,5 +118,37 @@ public class AppUserForm {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

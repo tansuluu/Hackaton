@@ -152,8 +152,7 @@ public class AppUserDAO  {
         appUser.setEncrytedPassword(encrytedPassword);
         appUser.setUserName(userName);
         appUser.setEmail(email);
-        appUser.setFirstName(userProfile.getFirstName());
-        appUser.setLastName(userProfile.getLastName());
+        appUser.setName(userProfile.getFirstName() + " "+userProfile.getLastName());
 
         this.entityManager.persist(appUser);
 
@@ -169,13 +168,15 @@ public class AppUserDAO  {
         AppUser appUser = new AppUser();
         appUser.setUserName(appUserForm.getUserName());
         appUser.setEmail(appUserForm.getEmail());
-        appUser.setFirstName(appUserForm.getFirstName());
-        appUser.setLastName(appUserForm.getLastName());
+
+        appUser.setName(appUserForm.getName());
         appUser.setEnabled(appUserForm.isEnabled());
         appUser.setConfirm(appUserForm.getConfirm());
         System.out.println(appUserForm.getUrlImage());
         appUser.setUrlImage(appUserForm.getUrlImage());
-        appUser.setDepartment(appUserForm.getDepartment());
+        appUser.setCountry(appUserForm.getCountry());
+        appUser.setAge(appUserForm.getAge());
+        appUser.setGender(appUserForm.getGender());
         String encrytedPassword = EncrytedPasswordUtils.encrytePassword(appUserForm.getPassword());
         appUser.setEncrytedPassword(encrytedPassword);
         this.entityManager.persist(appUser);
@@ -222,9 +223,9 @@ public class AppUserDAO  {
     }
     public void updateUser(AppUser user){
         AppUser usera=findAppUserByUserName(user.getUserName());
-        usera.setDepartment(user.getDepartment());
-        usera.setFirstName(user.getFirstName());
-        usera.setLastName(user.getLastName());
+        usera.setCountry(user.getCountry());
+        usera.setName(user.getName());
+        usera.setAge(user.getAge());
         this.entityManager.persist(usera);
         this.entityManager.flush();
     }

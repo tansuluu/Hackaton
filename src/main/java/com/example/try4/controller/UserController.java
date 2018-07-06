@@ -4,7 +4,6 @@ import com.example.try4.dao.AppUserDAO;
 import com.example.try4.dao.ApplicationDAO;
 import com.example.try4.dao.PostDAO;
 import com.example.try4.entity.AppUser;
-import com.example.try4.entity.Application;
 import com.example.try4.entity.Post;
 import com.example.try4.service.EmailService;
 import com.example.try4.service.StorageService;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -48,12 +46,9 @@ public class UserController {
     @RequestMapping("/userPage")
     public String showUser(Model model, @RequestParam("username")String username){
         AppUser user=appUserDAO.findAppUserByUserName(username);
-        List<Application> list=applicationDAO.getUsersApplication(username);
-        model.addAttribute("apps",list);
         model.addAttribute("user",user);
-        model.addAttribute("post",new Post());
-        model.addAttribute("posts",postDAO.findComment(username));
-        return "userPage";
+        System.out.println(username);
+        return "profile";
     }
     @RequestMapping(value = "/newPost", method = RequestMethod.POST)
     public String saveComment(@ModelAttribute("post") @Valid Post post, BindingResult result, Principal principal, @RequestParam("username") String username){
@@ -85,7 +80,6 @@ public class UserController {
     }
     @RequestMapping(value = "/updateUser",method =RequestMethod.POST)
     public String updateUsera(@ModelAttribute("user") @Valid AppUser user){
-        System.out.println(user.getDepartment());
         appUserDAO.updateUser(user);
         return "redirect:/userPage?username="+user.getUserName();
     }

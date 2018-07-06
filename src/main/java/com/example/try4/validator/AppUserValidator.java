@@ -40,7 +40,7 @@ public class AppUserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "", "First name is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "", "User name is required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "", "Last name is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "name is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password is required");
 
         AppUser userAccount = appUserDAO.findAppUserByUserName( form.getUserName());
@@ -54,26 +54,6 @@ public class AppUserValidator implements Validator {
             }
         }
 
-        if (!(form.getFirstName() != null && form.getFirstName().isEmpty())) {
-            pattern = Pattern.compile(STRING_PATTERN);
-            matcher = pattern.matcher(form.getFirstName());
-            if (!matcher.matches()) {
-                errors.rejectValue("firstName", "",
-                        "Enter a valid First name");
-            }
-        }
-        if (!(form.getLastName() != null && form.getLastName().isEmpty())) {
-            pattern = Pattern.compile(STRING_PATTERN);
-            matcher = pattern.matcher(form.getLastName());
-            if (!matcher.matches()) {
-                errors.rejectValue("lastName", "",
-                        "Enter a valid Last name");
-            }
-        }
-
-        if (errors.hasErrors()) {
-            return;
-        }
         if (!emailValidator.isValid(form.getEmail())) {
 
             errors.rejectValue("email", "", "Please write valid email");

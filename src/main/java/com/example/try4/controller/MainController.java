@@ -9,7 +9,6 @@ import com.example.try4.form.AppUserForm;
 import com.example.try4.service.EmailService;
 import com.example.try4.service.StorageService;
 import com.example.try4.utils.SecurityUtil;
-import com.example.try4.validator.AppUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.social.connect.Connection;
@@ -21,8 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -52,35 +53,19 @@ public class MainController {
     private UsersConnectionRepository connectionRepository;
 
     @Autowired
-    private AppUserValidator appUserValidator;
-    @Autowired
     private EmailService emailService;
 
-    @InitBinder
-    protected void initBinder(WebDataBinder dataBinder) {
-
-        // Form target
-        Object target = dataBinder.getTarget();
-        if (target == null) {
-            return;
-        }
-        if (target.getClass() == AppUserForm.class) {
-            dataBinder.setValidator(appUserValidator);
-        }
-        // ...
-    }
 
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
-        List<Application> app=applicationDAO.getApp();
-      model.addAttribute("app",app);
+
         return "index";
     }
 
 
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public String login(Model model) {
-        return "newIndex";
+        return "login";
     }
 
     // User login with social networking,
@@ -171,10 +156,11 @@ public class MainController {
                                @ModelAttribute("user") @Validated AppUserForm user, //
                                BindingResult result, //
                                final RedirectAttributes redirectAttributes, HttpServletRequest request,@RequestParam(name = "file",required = false)MultipartFile file) {
-
+        System.out.println("heteee");
         if (result.hasErrors()) {
             return "register";
         }
+        System.out.println("hetedsdddeedededee");
         user.setUrlImage("gmail.png");
         if (!file.isEmpty()){
             storageService.saveAvatar(file);

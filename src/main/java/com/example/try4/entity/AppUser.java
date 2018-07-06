@@ -21,13 +21,18 @@ public class AppUser {
     @Column(name = "Email", length = 128, nullable = false)
     private String email;
 
-    @Column(name = "First_Name", length = 36, nullable = false)
-    private String firstName;
+    @Column(name = "name", length = 36, nullable = false)
+    private String Name;
 
-    @Column(name = "Last_Name", length = 36, nullable = false)
-    private String lastName;
-    @Column(name = "department", length = 36, nullable = false)
-    private String department;
+    @Column(name = "country", length = 36, nullable = false)
+    private String country;
+
+    @Column(name = "gender", length = 36, nullable = false)
+    private String gender;
+
+    @Column(name = "age", length = 36, nullable = false)
+    private int age;
+
     @Column(name = "confirm", length = 200)
     private String confirm;
     @Column(name = "Encryted_Password", length = 128, nullable = false)
@@ -74,21 +79,6 @@ public class AppUser {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getEncrytedPassword() {
         return encrytedPassword;
@@ -106,13 +96,6 @@ public class AppUser {
         this.enabled = enabled;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 
     public String getConfirm() {
         return confirm;
@@ -122,5 +105,35 @@ public class AppUser {
         this.confirm = confirm;
     }
 
+    public String getName() {
+        return Name;
+    }
 
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

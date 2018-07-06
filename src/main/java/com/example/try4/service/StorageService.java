@@ -1,6 +1,6 @@
 package com.example.try4.service;
 
-import com.example.try4.entity.Application;
+import com.example.try4.entity.Place;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class StorageService {
 
     public static final Path rootApp = Paths.get("upload-dir");
     public static final Path avatar = Paths.get("up-avatar");
-    public Application preStore(MultipartFile f1, MultipartFile f2, MultipartFile f3, Application app){
+    public Place preStore(MultipartFile f1, MultipartFile f2, MultipartFile f3, Place app){
         if(!f1.isEmpty()){
             app.setPhoto1(f1.getOriginalFilename());
             store(f1);}
