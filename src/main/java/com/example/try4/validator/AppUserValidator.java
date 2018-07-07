@@ -37,7 +37,7 @@ public class AppUserValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         AppUserForm form = (AppUserForm) target;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "", "First name is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "country", "", "Country is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "", "User name is required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "name is required");

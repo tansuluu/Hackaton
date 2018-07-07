@@ -9,6 +9,7 @@ import com.example.try4.form.AppUserForm;
 import com.example.try4.service.EmailService;
 import com.example.try4.service.StorageService;
 import com.example.try4.utils.SecurityUtil;
+import com.example.try4.validator.AppUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.social.connect.Connection;
@@ -20,10 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -54,6 +53,22 @@ public class MainController {
 
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private AppUserValidator appUserValidator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder dataBinder) {
+
+        // Form target
+        Object target = dataBinder.getTarget();
+        if (target == null) {
+            return;
+        }
+        if (target.getClass() == AppUserForm.class) {
+            dataBinder.setValidator(appUserValidator);
+        }
+        // ...
+    }
 
 
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
@@ -162,10 +177,12 @@ public class MainController {
         }
         System.out.println("hetedsdddeedededee");
         user.setUrlImage("gmail.png");
+
         if (!file.isEmpty()){
             storageService.saveAvatar(file);
             user.setUrlImage(file.getOriginalFilename());
         }
+
         try {
             user.setConfirm(UUID.randomUUID().toString());
 
