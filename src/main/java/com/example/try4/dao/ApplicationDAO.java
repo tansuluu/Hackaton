@@ -31,15 +31,6 @@ public class ApplicationDAO {
         this.entityManager.flush();
         return app;
     }
-    public List<Application> getApp() {
-        try {
-            String sql = "Select e from " + Application.class.getName() + " e ";
-            Query query = entityManager.createQuery(sql, Application.class);
-            return query.getResultList();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
     public Application findAppId(long id) {
         try {
             String sql = "Select e from " + Application.class.getName() + " e " //
@@ -109,11 +100,6 @@ public class ApplicationDAO {
         Application application=findAppId(id);
         application.setView(application.getView()-1);
         application.setLikes(application.getLikes()+n);
-        return addApp(application);
-    }
-    public Application updateView(long id,int n){
-        Application application=findAppId(id);
-        application.setView(application.getView()+n);
         return addApp(application);
     }
 
